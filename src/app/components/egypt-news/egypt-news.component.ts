@@ -1,3 +1,4 @@
+import { NewsService } from './../../services/news.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EgyptNewsComponent implements OnInit {
 
-  constructor() { }
+  news: any=[];
+
+  constructor(private _newsService: NewsService) {
+    this._newsService.getEgyptNews()
+    .subscribe(
+      (response: any) => {
+        this.news = response.articles;
+        console.log(JSON.stringify(response));
+      });
+  }
 
   ngOnInit(): void {
+
   }
 
 }
